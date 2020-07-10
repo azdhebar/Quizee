@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit | Quizee
+{% endblock %}
+{% block body %}
+<div class=" container my-4 ">
+
+
+<form class ="mx-2 my-2" action="{{url_for('editquestion',id=question.id)}}" method="POST">
+  {% if error %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{error}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  {% endif %}
+  <h4>Edit Question</h4>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Question</label>
+    <textarea class = "form-control" name="question" required>{{question.question}}</textarea>
+  </div>
+ {% for option in question.options%}
+  <div class="form-group">
+    <label for="exampleInputPassword1">Option {{loop.index}}</label>  (<b>correct</b>:
+   <input type = "radio"  name ="correct" value = "option{{loop.index}}" {% if option.correct==1%}checked{%endif%} required/>)<input required type ="text" name="option{{loop.index}}" value="{{option.option}}" class = "form-control"/>
+
+  </div>
+{% endfor %}
+    <div class="form-group form-check">
+    </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+    </div>
+  {% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% block title %}
+Edit | Quizee
+{% endblock %}
+
+{% block body %}
+<div class = "container my-4">
+<h4>Your Results
+</h4>
+<hr>
+{% if score %}
+
+<table class  ="table text-light">
+    <tr>
+        <th>No</th>
+        <th>Quiz Name</th>
+        <th>Date</th>
+        <th>Score</th>
+        <th>Total</th>
+
+
+    </tr>
+
+    {% for s in score %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{s.quiz.qname}}</td>
+       <td>
+            {{s.created_time}}
+        </td>
+        <td>{{s.score}}</td>
+        <td>{{s.total}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+{%else%}
+    <p>Data Not Found!!</p>
+    {%endif%}
+{%endblock%}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}
+Add | Quizee
+{% endblock %}
+{% block body %}
+<div class=" container my-4 ">
+
+
+<form class ="mx-2 my-2" action="{{url_for('addnewquestion',id=id)}}" method="POST">
+  {% if error %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{error}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  {% endif %}
+  <h4>Add Question</h4>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Question</label>
+    <textarea class = "form-control" name="question" required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Option 1</label>  (<b>correct</b>:
+   <input type = "radio"  name ="correct" value = "option1" required/>)<input required type ="text" name="option1" class = "form-control"/>
+
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Option 2</label>  (<b>correct</b>:
+   <input type = "radio"  required name ="correct" value = "option2"/>)<input required type ="text" name="option2" class = "form-control"/>
+
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Option 3</label>  (<b>correct</b>:
+   <input type = "radio"  required name ="correct" value = "option3"/>)<input required type ="text" name="option3" class = "form-control"/>
+
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Option 4</label>  (<b>correct</b>:
+   <input type = "radio"  required name ="correct" value = "option4"/>)<input  required type ="text" name="option4" class = "form-control"/>
+
+  </div>
+
+    <div class="form-group form-check">
+    </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    </div>
+  {% endblock %}

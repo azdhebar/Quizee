@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title%}
+Quiz | Quizee
+{% endblock %}
+
+{%block body%}
+<div class = "container my-2">
+    <h3>Quizes</h3>
+    <hr>
+      {% if error %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{error}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  {% endif %}
+      {% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{success}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  {% endif %}
+{% if quizes %}
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Code</th>
+      <th scope="col">Option</th>
+      <th scope="col">Results</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+
+{% for quize in quizes %}
+
+
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{quize.qname}}</td>
+      <td>{{quize.qcode}}</td>
+        <td>
+
+            <a href = "/addQuestions/{{quize.id}}" class = "btn btn-primary"><span><i class="fa fa-edit" aria-hidden="true"></i></span></a>
+
+        <a href = "/deleteQuiz/{{quize.id}}" class = "btn btn-danger"><span><i class="fa fa-trash" aria-hidden="true"></i></span></a></td>
+    <td>       <a href = "/seeResult/{{quize.id}}" class = "btn btn-primary"><span><i class="fa fa-eye" aria-hidden="true"></i></span></a>
+</td>
+    </tr>
+
+
+    {% endfor %}
+{% else %}
+    <p>No Data Available</p>
+
+{% endif %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

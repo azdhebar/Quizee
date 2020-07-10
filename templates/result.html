@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+Login | Quizee
+{% endblock %}
+{% block body %}
+<div class=" container my-4 ">
+
+
+  {% if error %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{error}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  {% endif %}
+  <h4>Result:</h4>
+  <div class="card bg-dark text-light">
+      <div class="card-header">Score</div>
+      <div class=" card-body"> <b class="text-primary">{{correct}}</b> Out Of <b class=" text-danger">{{all}}</b></div>
+    </div>
+
+</div>
+  {% endblock %}

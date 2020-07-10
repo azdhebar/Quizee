@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+Dashboard | Quizee
+{% endblock %}
+
+{% block body %}
+<div class=" container my-2">
+
+    <h4 >Dashboard</h4>
+    <hr>
+    <div class = "row" >
+<div class="card bg-dark text-light mx-2 my-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Create Quiz</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Create A Quiz Digitally</h6>
+    <p class="card-text">Every Quiz Will Be Created Here</p>
+    <a href="{{url_for('createQuiz')}}" class="card-link">Create Now</a>
+    </div>
+</div>
+        <div class="card bg-dark text-light mx-2 my-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">See Quiz</h5>
+    <h6 class="card-subtitle mb-2 text-muted">See The Quiz </h6>
+    <p class="card-text">Which Is Created By You</p>
+    <a href="{{url_for('displayQuiz')}}" class="card-link">See Now</a>
+    </div>
+</div>
+    <div class="card bg-dark text-light mx-2 my-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Join Quiz</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Join A Quiz Digitally</h6>
+    <p class="card-text">You Can Give A Test</p>
+    <a href="{{url_for('joinQuiz')}}" class="card-link">Join Now</a>
+    </div>
+</div>
+    <div class="card bg-dark text-light mx-2 my-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Your Results</h5>
+    <h6 class="card-subtitle mb-2 text-muted">See Results</h6>
+    <p class="card-text">Learn From It</p>
+    <a href="{{url_for('seeResult')}}" class="card-link">See Now</a>
+    </div>
+</div>
+
+
+        </div>
+</div>
+{% endblock %}
+

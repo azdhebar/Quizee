@@ -1,0 +1,57 @@
+{% extends 'base.html'%}
+{% block title %}
+Edit | Quizee
+{% endblock %}
+
+{% block body %}
+<div class = "container my-4">
+
+<h5>Name Of Quiz: <b style ="margin-left:10px">{{quiz.qname}}</b></h5>
+
+</div>
+<hr>
+{% if quiz.questions %}
+<form method="post" action="{{url_for('result',id=quiz.id)}}">
+<table class  ="table text-light">
+    <tr>
+        <th>No</th>
+        <th>Question Name</th>
+
+
+    </tr>
+
+    {% for question in quiz.questions %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{question.question}}<br>
+
+        {% for option in question.options %}
+            <div class="my-2">
+           <div class="input-group ">
+                 <div class="input-group-text"  >
+            <input type = "radio" value="{{option.id}}" name="{{question.id}}" /> </div>&nbsp;{{option.option}}
+
+                 </div>
+</div>
+
+               {% endfor %}
+
+        </td>
+
+
+    </tr>
+    {% endfor %}
+
+</table>
+    <center>
+        <div style="margin-bottom:40px">
+    <input type = "submit" class = "btn btn-primary" value = "Submit"/>
+        &nbsp;
+    <input type = "reset" class = "btn btn-danger" value = "Reset"/>
+</div>
+</center>
+</form>
+{%else%}
+    <p>Data Not Found!!</p>
+    {%endif%}
+{%endblock%}

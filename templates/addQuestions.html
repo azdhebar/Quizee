@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+{% block title %}
+Edit | Quizee
+{% endblock %}
+
+{% block body %}
+<div class = "container my-4">
+<h4>Detais &nbsp;
+    {% if quiz.lock==0 %}
+
+    <a  href="{{url_for('endQuiz',id=quiz.id)}}" class = "btn btn-danger" ><span>Disable</span></a>
+    {% else %}
+    <a href="{{url_for('endQuiz',id=quiz.id)}}"  class = "btn btn-primary" ><span>Enable</span></a>
+
+{%endif%}
+    <a href="/add/{{quiz.id}}" style = "border-radius:50%;" class = "btn btn-primary" ><span><i class="fa fa-plus" aria-hidden="true"></i></span></a>
+
+     {% if quiz.lock==0 %}
+        <b>Quiz is Enable</b>
+    {% else %}
+        <b>Quiz is Disable</b>
+    {%endif%}
+</h4>
+<h5>Name Of Quiz: <b style ="margin-left:10px">{{quiz.qname}}</b></h5>
+<h5>Code Of Quiz: <b style ="margin-left:10px">{{quiz.qcode}}</b></h5>
+<h5>Date <b style ="margin-left:10px">{{quiz.created_time}} <sub>as per UTC</sub></b></h5>
+</div>
+<hr>
+{% if questions %}
+
+<table class  ="table text-light">
+    <tr>
+        <th>No</th>
+        <th>Question Name</th>
+
+        <th>Options</th>
+    </tr>
+
+    {% for question in questions %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{question.question}}</td>
+       <td>
+               <a href="/edit/{{question.id}}" style ="border-radius:50%"class = "btn btn-primary" ><span><i class="fa fa-edit" aria-hidden="true"></i></span></a>
+                &nbsp;
+
+             <a href="{{url_for('deletequestion',id=question.id,qid=quiz.id)}}" style ="border-radius:50%"class = "btn btn-danger" ><span><i class="fa fa-trash" aria-hidden="true"></i></span></a>
+
+
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+{%else%}
+    <p>Data Not Found!!</p>
+    {%endif%}
+{%endblock%}

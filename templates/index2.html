@@ -1,0 +1,47 @@
+
+{% extends 'base.html'%}
+{%block body%}
+<script src= "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script >
+
+        $(function() {
+  $('.btn').click(function() {
+    $(this).toggleClass('is-clicked');
+  });
+});
+        const btn = document.getElementById('btn');
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.onstart = function(){
+
+    console.log('You can speak now!!!');
+}
+
+recognition.onresult = function(event){
+let userText = $("#result").val();
+    var text = event.results[0][0].transcript;
+    console.log(text);
+    $.get("/get", { msg: text }).done(function(data) {
+    console.log(data)
+        read(data)
+
+});
+
+}
+
+function read(text){
+    var speech = new SpeechSynthesisUtterance();
+    speech.text = text;
+
+
+    window.speechSynthesis.speak(speech);
+}
+</script>
+<br>
+<center>
+ <a  id="btn" onclick='recognition.start()'  style="width:200px;height:200px;border-radius:50%"class="btn btn-primary"><center><div style="margin-top:40%"><span class="my-2"> <i  class="fa fa-microphone fa-3x"></i></span></div></center></a>
+</center>
+        <input type= "hidden" id="result">
+{%endblock%}

@@ -1,5 +1,6 @@
 from datetime import datetime
-
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 import bcrypt
 
 from flask import Flask, render_template, request, redirect, session
@@ -7,6 +8,11 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
 
 app = Flask(__name__)
+englishBot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
+trainer = ChatterBotCorpusTrainer(englishBot)
+trainer.train("chatterbot.corpus.english")  # train the chatter bot for english
+
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quizee.db"
 app.secret_key = "hello"
 db = SQLAlchemy(app)
@@ -87,6 +93,16 @@ def hashed_password(password):
 
 
 # without login Routes
+
+@app.route("/get")
+
+def get_bot_response():
+    userText = request.args.get('msg')
+    return str(englishBot.get_response(userText))
+@app.route("/voice")
+def voice():
+    return render_template("index2.html")
+
 @app.route('/')
 def index():
     if "user" not in session:
